@@ -19,7 +19,8 @@ export default function handler(
   const filePath = path.resolve(".", `files/annette_app/klausur_${klasse}.pdf`);
   const imageBuffer = fs.readFileSync(filePath);
 
-  res.setHeader("Content-Type", "text/pdf");
+  res.setHeader("Content-Type", "application/pdf"); 
+  //* correct "MIME type" is application/pdf
   res.send(imageBuffer);
 
 }
