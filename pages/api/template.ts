@@ -1,4 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+/**
+ * Diese Datei soll nur als Template-Datei dienen, damit man beim Programmieren den Code-Aufbau sich angucken kann.
+ * Bitte verändert hieran keinen Code.
+ */
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
