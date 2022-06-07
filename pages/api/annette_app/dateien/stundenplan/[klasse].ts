@@ -69,7 +69,7 @@ export default async function handler(
     "ajax.webuntis.com"
   );
 
-  const { klasse }: string = req.query;
+  const { klasse } = Array.isArray(req.query) ? req.query[0] : req.query;
 
   if (!klassen.includes(klasse.toUpperCase())) {
     res.status(400).json({ error: "Klasse nicht vorhanden" });
