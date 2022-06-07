@@ -47,8 +47,6 @@ const tmg = new Map<string, string>([
   ["1610", "10"],
   ["1700", "11"],
 ]);
- 
-
 
 export default async function handler(
   req: NextApiRequest,
@@ -61,7 +59,6 @@ export default async function handler(
     return;
   }
 
-  //res.status(200).json({ name: "John Doe" });
   const WebUntisLib = require("webuntis");
 
   const untis = new WebUntisLib.WebUntisAnonymousAuth(
@@ -85,8 +82,6 @@ export default async function handler(
     WebUntisLib.TYPES.CLASS
   );
 
-  //98,"9B","GO","D","H004",4,1,,
-
   let timetableString = "";
   for(const element of table) {
     const sId = "0";
@@ -109,47 +104,4 @@ export default async function handler(
   }
 
   res.status(200).json(timetableString);
-  
-  /* 
-  
-  {
-    "id": 401340,
-    "date": 20220608,
-    "startTime": 1150,
-    "endTime": 1235,
-    "kl": [
-      {
-        "id": 132,
-        "name": "Q1",
-        "longname": "HEISLER / HENZE"
-      }
-    ],
-    "te": [
-      {
-        "id": 140,
-        "name": "HN",
-        "longname": "HÖSGEN"
-      }
-    ],
-    "su": [
-      {
-        "id": 140,
-        "name": "CH GK1",
-        "longname": "CHEMIE Grundkurs"
-      }
-    ],
-    "ro": [
-      {
-        "id": 220,
-        "name": "D107",
-        "longname": "Chemie 2"
-      }
-    ],
-    "lstext": "GK-Schiene 6",
-    "lsnumber": 82400,
-    "sg": "CHGK1_Q1",
-    "activityType": "Unterricht"
-  },
-
-  */
 }
