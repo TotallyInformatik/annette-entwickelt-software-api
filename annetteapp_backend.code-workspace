@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "."
+		},
+		{
+			"path": "..\\..\\Dart\\stundenplan_yoink"
 		}
 	],
 	"settings": {
