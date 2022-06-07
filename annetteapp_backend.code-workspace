@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\Flutter\\annette_app_3.0\\annette_app_3.0"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\Dart\\stundenplan_yoink"
+		}
+	],
+	"settings": {
+		"rpc.enabled": false
+	}
+}
