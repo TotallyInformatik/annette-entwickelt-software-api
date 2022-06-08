@@ -2,10 +2,7 @@ import { readFileSync } from "fs";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const file = `1,"LR","TH",,,5,4,,
   1,"LR","WEB",,,5,4,,
   1,"LR","VRC",,,5,4,,
