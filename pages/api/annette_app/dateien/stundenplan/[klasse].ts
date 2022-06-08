@@ -130,7 +130,7 @@ export default async function handler(
       res.status(500).json("Bad date");
     }
     //Zeile zusammenfügen und zu String hinzufügen
-    const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sStunde + "," + sTag + "," + ",\n";
+    const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sStunde + "," + sTag + "," + ",";
     timetableString += sElement;
   }
 
