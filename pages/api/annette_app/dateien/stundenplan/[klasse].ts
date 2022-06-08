@@ -130,7 +130,11 @@ export default async function handler(
       res.status(500).json("Bad date");
     }
     //Zeile zusammenfügen und zu String hinzufügen
+<<<<<<< Updated upstream
     const sElement = sId + "," + sKlasse + "," + sLehrer + "," + sFach + "," + sRaum + "," + sStunde + "," + sTag + ",";
+=======
+    const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sStunde + "," + sTag + ",";
+>>>>>>> Stashed changes
     timetableString += sElement;
   }
 
