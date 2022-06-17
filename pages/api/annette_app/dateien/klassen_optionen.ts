@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { WebUntisDay, Klasse } from "webuntis";
 
 export default async function handler(
   req: NextApiRequest,
