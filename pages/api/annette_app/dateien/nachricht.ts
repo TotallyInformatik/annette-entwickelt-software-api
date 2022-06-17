@@ -22,8 +22,7 @@ export default function handler(
   const filePath = path.resolve(".", `files/annette_app/nachrichten/${fileName}.md`);
   const textBuffer = fs.readFileSync(filePath);
 
-  res.setDefaultEncoding("utf-8");
-  res.setHeader("Content-Type", "text/markdown");
+  res.setHeader("Content-Type", "text/markdown; charset=utf-8");
   res.setHeader("Message-Date", fileName); // fileName tells the user the date.
   res.status(200).send(textBuffer);
 
