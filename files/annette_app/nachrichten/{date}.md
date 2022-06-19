@@ -1,5 +1,9 @@
 # Die Annette-Entwickelt-Software AG präsentiert: Annette-App 4.0
  
+
+ 
+______
+
 Guten Tag liebe Schülerinnen und Schüler!
 
 Es ist uns, den Entwicklern bei der **Annette-Entwickelt-Software-AG** eine Freude und Ehre, euch die neue Version der Annette-App zu präsentieren.
@@ -7,6 +11,8 @@ Seit Anfang des Jahres 2022 arbeiten wir zusammen fleißig an diversen Software-
 
 Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<annettesoftware@gmail.com>**
 
+
+______
 
 ## Was enthält die neue Version?
 
@@ -16,7 +22,8 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
 - Verbesserter Hausaufgaben-Planer
 - ein Haufen an Bugfixes
 
-<br><br>
+______
+
 Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
 
 *Rui Zhang*
