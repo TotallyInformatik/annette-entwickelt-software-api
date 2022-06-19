@@ -1,40 +1,23 @@
-# Überschrift
+# Die Annette-Entwickelt-Software AG präsentiert: Annette-App 4.0
+ 
+Guten Tag liebe Schülerinnen und Schüler!
 
-Lorem Ipsum Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+Es ist uns, den Entwicklern bei der **Annette-Entwickelt-Software-AG** eine Freude und Ehre, euch die neue Version der Annette-App zu präsentieren.
+Seit Anfang des Jahres 2022 arbeiten wir zusammen fleißig an diversen Software-Projekten der Schule, inklusive der *Annette-App*.
 
-### Images
-
-![image alt text](https://www.bsv-duesseldorf.de/static/media/167667838_234765408429645_5699080646736834876_n-850x850.545d9d1c24d7e4c0c099.jpg)
-
-### Links
-
-I love supporting the **[EFF](https://eff.org)**.
-This is the *[Markdown Guide](https://www.markdownguide.org)*.
-See the section on [`code`](#code).
-
-### Code
-`
-
-for i in range(10):
-  print("bruh");
-
-`
-
-### Lists
-
-1. First item
-2. Second item
-3. Third item
-    1. Indented item
-    2. Indented item
-4. Fourth item
+Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<annettesoftware@gmail.com>**
 
 
-### Blockquotes
+## Was enthält die neue Version?
 
-> #### The quarterly results look great!
->
->> - Revenue was off the chart.
->> - Profits were higher than ever.
->
->  *Everything* is going according to **plan**.
+- überarbeitetes Design
+- ***aktuellere***, automatisierte Stundenpläne
+- Klausurplan-Tab
+- Verbesserter Hausaufgaben-Planer
+- ein Haufen an Bugfixes
+
+<br><br>
+Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
+
+*Rui Zhang*
+*Leiter der Annette-Entwickelt-Software-AG*
