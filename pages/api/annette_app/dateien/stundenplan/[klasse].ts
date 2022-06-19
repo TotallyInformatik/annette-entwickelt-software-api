@@ -71,6 +71,11 @@ export default async function handler(
     return;
   }
 
+  const {
+    query: { name, keyword },
+    method,
+  } = req;
+
   //WebUntis-API
   const WebUntisLib = require("webuntis");
 
