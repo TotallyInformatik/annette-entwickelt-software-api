@@ -109,7 +109,7 @@ export default async function handler(
 
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
-    new Date("2022-06-01"),
+    new Date("2022-06-06"),
     classes[klassen.indexOf(klasse.toUpperCase())].id, //ID der Klasse herausfinden
     WebUntisLib.TYPES.CLASS,
     2
