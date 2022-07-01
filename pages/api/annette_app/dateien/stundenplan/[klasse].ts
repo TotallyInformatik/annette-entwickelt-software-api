@@ -115,9 +115,11 @@ export default async function handler(
 
   let timetableString = ""; //String, der später mit den Informationen gefüllt wird
 
+  let id = 0; //ID des Elements, das gerade bearbeitet wird
+
   //Durch alle Stunden iterieren
   for(const element of table) {
-    const sId = "420"; //eigentlich egal
+    const sId = id; //eigentlich egal
     const sKlasse = element.kl[0].name; //Klassenname, z.B. 5A, EF, Q1
     const sLehrer = element.te[0].name; //Lehrerkürzel
     const sFach = element.su[0].name; //Fach, z.B. E GK2
@@ -137,6 +139,7 @@ export default async function handler(
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sTag + "," + sStunde + "," + ",";
     timetableString += sElement;
+    id++;
   }
 
   //String als JSON-Response senden
