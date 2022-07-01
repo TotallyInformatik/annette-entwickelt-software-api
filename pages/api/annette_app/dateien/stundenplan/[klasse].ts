@@ -109,10 +109,15 @@ export default async function handler(
 
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
-    new Date("2022-01-05"),
+    new Date("2022-06-01"),
     classes[klassen.indexOf(klasse.toUpperCase())].id, //ID der Klasse herausfinden
-    WebUntisLib.TYPES.CLASS
+    WebUntisLib.TYPES.CLASS,
+    2
   );
+
+  console.log(table);
+
+
 
   let timetableString = ""; //String, der später mit den Informationen gefüllt wird
 
@@ -132,10 +137,10 @@ export default async function handler(
     const matches = regex.exec(date); //Ergebnis der Regex-Auswertung
 
     //Jahr, Monat und Tag aus dem Ergebnis extrahieren, Date erzeugen und den Wochentag herausfinden
-    const sTag = (matches == null) ? -1 : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
+    const sTag = (matches == null) ? 1 : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
     //Fehlermeldung, falls das Date keinen Sinn ergibt oder null ist
     if(matches == null) {
-      res.status(500).json("Bad date");
+     
     }
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sTag + "," + sStunde + "," + ",";
