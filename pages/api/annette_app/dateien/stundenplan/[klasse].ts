@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-/**
- *  Liste mit allen Klassen, für die der Stundenplan abgefragt werden kann
- */
-let klassen: string[] = [];
+//WebUntis-API
+const WebUntisLib = require("webuntis");
 
 /**
  * Timegrid mit allen Stunden nach Startuhrzeit
@@ -46,8 +44,10 @@ export default async function handler(
     method,
   } = req;
 
-  //WebUntis-API
-  const WebUntisLib = require("webuntis");
+  /**
+   *  Liste mit allen Klassen, für die der Stundenplan abgefragt werden kann
+   */
+  let klassen: string[] = [];
 
   //Anonym anmelden
   const untis = new WebUntisLib.WebUntisAnonymousAuth(
@@ -58,17 +58,17 @@ export default async function handler(
   //Untis-Client initialisieren
   await untis.login();
 
-   //Alle Klassen, die es auf Untis gibt, abfragen
+  //Alle Klassen, die es auf Untis gibt, abfragen
   const classes = await untis.getClasses();
 
-  //AGs und andere Gruppen herausfiltern
-  const last = classes.indexOf("Q2");
-
   //Alle tatsächlichen Klassen in das Array schreiben
-  for(let i = 0; i < last; i++) {
-    klassen.push(classes[i].name);
+  for (let element of classes) {
+    const name = element["name"];
+    const klRegex = /^\d+[a-zA-Z]{1}|Q1|Q2|EF$/gm;
+    if (klRegex.exec(name)?.length == 1) {
+      klassen.push(element["name"]);
+    }
   }
-
 
   const { klasse } = Array.isArray(req.query) ? req.query[0] : req.query;
   //Da die Parameter entweder nur ein String oder ein String-Array sind, muss hier geprüft werden, worum es sich handelt
@@ -79,11 +79,6 @@ export default async function handler(
     //Fehlermeldung, falls nicht
     res.status(400).json({ error: "Klasse nicht vorhanden" });
   }
-
-  /*
-    * Debug: Klasse ausgeben
-  console.log(klasse.toUpperCase());
-  */
 
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
@@ -117,16 +112,7 @@ export default async function handler(
       matches == null
         ? 1
         : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
-    //Fehlermeldung, falls das Date keinen Sinn ergibt oder null ist
-    if (matches == null) {
-    }
-    /*console.log(sId);
-    console.log(sKlasse);
-    console.log(sLehrer);
-    console.log(sFach);
-    console.log(sRaum);
-    console.log(sStunde);
-    console.log(sTag);*/
+
 
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement =
