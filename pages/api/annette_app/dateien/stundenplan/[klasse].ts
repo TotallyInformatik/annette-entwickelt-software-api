@@ -142,13 +142,13 @@ export default async function handler(
     if(matches == null) {
      
     }
-    console.log(sId);
+    /*console.log(sId);
     console.log(sKlasse);
     console.log(sLehrer);
     console.log(sFach);
     console.log(sRaum);
     console.log(sStunde);
-    console.log(sTag);
+    console.log(sTag);*/
 
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sTag + "," + sStunde + "," + ",";
