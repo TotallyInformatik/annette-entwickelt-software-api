@@ -126,10 +126,10 @@ export default async function handler(
   //Durch alle Stunden iterieren
   for(const element of table) {
     const sId = id; //eigentlich egal
-    const sKlasse = element.kl[0].name; //Klassenname, z.B. 5A, EF, Q1
-    const sLehrer = element.te[0].name; //Lehrerkürzel
-    const sFach = element.su[0].name; //Fach, z.B. E GK2
-    const sRaum = (element.ro[0] != null) ? element.ro[0].name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
+    const sKlasse = element.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
+    const sLehrer = "XX"; //Lehrerkürzel
+    const sFach = element.su[0]?.name; //Fach, z.B. E GK2
+    const sRaum = (element.ro[0] != null) ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
     const sStunde: string = tmg.get(element.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 
     const date = element["date"]; //Datum der Stunde
@@ -142,6 +142,14 @@ export default async function handler(
     if(matches == null) {
      
     }
+    console.log(sId);
+    console.log(sKlasse);
+    console.log(sLehrer);
+    console.log(sFach);
+    console.log(sRaum);
+    console.log(sStunde);
+    console.log(sTag);
+
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sTag + "," + sStunde + "," + ",";
     timetableString += sElement;
@@ -150,4 +158,5 @@ export default async function handler(
 
   //String als JSON-Response senden
   res.status(200).json(timetableString);
+  untis.logout();
 }
