@@ -3,36 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 /**
  *  Liste mit allen Klassen, für die der Stundenplan abgefragt werden kann
  */
-const klassen = [
-  "5A",
-  "5B",
-  "5C",
-  "5D",
-  "5E",
-  "6A",
-  "6B",
-  "6C",
-  "6D",
-  "6F",
-  "7A",
-  "7B",
-  "7C",
-  "7D",
-  "7F",
-  "8A",
-  "8B",
-  "8C",
-  "8D",
-  "8E",
-  "9A",
-  "9B",
-  "9C",
-  "9D",
-  "9E",
-  "EF",
-  "Q1",
-  "Q2",
-];
+let klassen: string[] = [];
 
 /**
  * Timegrid mit allen Stunden nach Startuhrzeit
@@ -51,7 +22,6 @@ const tmg = new Map<string, string>([
   ["1610", "10"],
   ["1700", "11"],
 ]);
-
 
 /**
  * Der Handler für sämtliche GET-Requests
@@ -85,6 +55,21 @@ export default async function handler(
     "ajax.webuntis.com" //Servername, auf dem der Stundenplan liegt
   );
 
+  //Untis-Client initialisieren
+  await untis.login();
+
+   //Alle Klassen, die es auf Untis gibt, abfragen
+  const classes = await untis.getClasses();
+
+  //AGs und andere Gruppen herausfiltern
+  const last = classes.indexOf("Q2");
+
+  //Alle tatsächlichen Klassen in das Array schreiben
+  for(let i = 0; i < last; i++) {
+    klassen.push(classes[i].name);
+  }
+
+
   const { klasse } = Array.isArray(req.query) ? req.query[0] : req.query;
   //Da die Parameter entweder nur ein String oder ein String-Array sind, muss hier geprüft werden, worum es sich handelt
   //(TypeScript mag keine uneindeutigen Types)
@@ -100,13 +85,6 @@ export default async function handler(
   console.log(klasse.toUpperCase());
   */
 
-  //Untis-Client initialisieren
-  await untis.login();
-
-  //Alle Klassen, die es auf Untis gibt, abfragen
-  //TODO: klassen-Array mit untis.getClasses() ersetzen
-  const classes = await untis.getClasses();
-
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
     new Date("2022-06-13"),
@@ -117,19 +95,17 @@ export default async function handler(
 
   console.log(table);
 
-
-
   let timetableString = ""; //String, der später mit den Informationen gefüllt wird
 
   let id = 0; //ID des Elements, das gerade bearbeitet wird
 
   //Durch alle Stunden iterieren
-  for(const element of table) {
+  for (const element of table) {
     const sId = id; //eigentlich egal
     const sKlasse = element.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
     const sLehrer = "XX"; //Lehrerkürzel
     const sFach = element.su[0]?.name; //Fach, z.B. E GK2
-    const sRaum = (element.ro[0] != null) ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
+    const sRaum = element.ro[0] != null ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
     const sStunde: string = tmg.get(element.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 
     const date = element["date"]; //Datum der Stunde
@@ -137,10 +113,12 @@ export default async function handler(
     const matches = regex.exec(date); //Ergebnis der Regex-Auswertung
 
     //Jahr, Monat und Tag aus dem Ergebnis extrahieren, Date erzeugen und den Wochentag herausfinden
-    const sTag = (matches == null) ? 1 : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
+    const sTag =
+      matches == null
+        ? 1
+        : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
     //Fehlermeldung, falls das Date keinen Sinn ergibt oder null ist
-    if(matches == null) {
-     
+    if (matches == null) {
     }
     /*console.log(sId);
     console.log(sKlasse);
@@ -151,7 +129,30 @@ export default async function handler(
     console.log(sTag);*/
 
     //Zeile zusammenfügen und zu String hinzufügen
-    const sElement = sId + "," + '"' + sKlasse + '"' + "," + '"' + sLehrer + '"' + "," + '"' + sFach + '"' + "," + '"' + sRaum + '"' + "," + sTag + "," + sStunde + "," + ",";
+    const sElement =
+      sId +
+      "," +
+      '"' +
+      sKlasse +
+      '"' +
+      "," +
+      '"' +
+      sLehrer +
+      '"' +
+      "," +
+      '"' +
+      sFach +
+      '"' +
+      "," +
+      '"' +
+      sRaum +
+      '"' +
+      "," +
+      sTag +
+      "," +
+      sStunde +
+      "," +
+      ",";
     timetableString += sElement;
     id++;
   }
