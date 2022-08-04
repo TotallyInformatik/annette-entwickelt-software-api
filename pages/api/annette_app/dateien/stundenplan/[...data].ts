@@ -37,7 +37,7 @@ export default async function handler(
       error: "Method not allowed",
     });
     return;
-  }
+  } //ok
 
   const {
     query: { name, keyword },
@@ -84,7 +84,7 @@ export default async function handler(
     res.status(400).json({ error: "Klasse nicht vorhanden" });
   }
   console.log(data);
-  console.log(new Date(datum).toString());
+  console.log(datum.toString());
 
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
@@ -94,7 +94,7 @@ export default async function handler(
     2
   );
 
-  if(table != null) {
+  if(table != "") {
   console.log("<< Table");
   } else {
     console.log("TABLE == NULL OMG NEIN");
@@ -122,7 +122,6 @@ export default async function handler(
       matches == null
         ? 1
         : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
-
 
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement =
