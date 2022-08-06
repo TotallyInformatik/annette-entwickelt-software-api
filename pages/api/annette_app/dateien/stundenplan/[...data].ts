@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import cache from "memory-cache";
 
 //WebUntis-API
 const WebUntisLib = require("webuntis");
@@ -43,6 +44,11 @@ export default async function handler(
     query: { name, keyword },
     method,
   } = req;
+
+  const cachedResult = cache.get(req.url);
+  if (cachedResult) {
+    res.status(200).json(cachedResult);
+  } else {
 
   /**
    *  Liste mit allen Klassen, für die der Stundenplan abgefragt werden kann
@@ -152,7 +158,17 @@ export default async function handler(
     id++;
   }
 
+  //put the response into the cache until the next day at 02:00
+  const tomorrow = new Date(datum);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(2);
+  tomorrow.setMinutes(0);
+  tomorrow.setSeconds(0);
+  cache.put(req.url, timetableString, tomorrow.getTime() - new Date().getTime());
+  console.log("<< Cache | " + tomorrow.toString());
+
   //String als JSON-Response senden
   res.status(200).json(timetableString);
   untis.logout();
+  }
 }
