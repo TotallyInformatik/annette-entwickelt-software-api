@@ -47,6 +47,7 @@ export default async function handler(
 
   const cachedResult = cache.get(req.url);
   if (cachedResult) {
+    console.log("Serving cached result for", req.url);
     res.status(200).json(cachedResult);
   } else {
 
@@ -159,9 +160,9 @@ export default async function handler(
   }
 
   //put the response into the cache until the next day at 02:00
-  const tomorrow = new Date(datum);
+  const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(2);
+  tomorrow.setHours(4);
   tomorrow.setMinutes(0);
   tomorrow.setSeconds(0);
   cache.put(req.url, timetableString, tomorrow.getTime() - new Date().getTime());
