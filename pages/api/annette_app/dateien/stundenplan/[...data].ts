@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import cache from "memory-cache";
 
 //WebUntis-API
 const WebUntisLib = require("webuntis");
@@ -37,12 +38,17 @@ export default async function handler(
       error: "Method not allowed",
     });
     return;
-  }
+  } //ok
 
   const {
     query: { name, keyword },
     method,
   } = req;
+
+  const cachedResult = cache.get(req.url);
+  if (cachedResult) {
+    res.status(200).json(cachedResult);
+  } else {
 
   /**
    *  Liste mit allen Klassen, für die der Stundenplan abgefragt werden kann
@@ -70,26 +76,36 @@ export default async function handler(
     }
   }
 
-  const { klasse } = Array.isArray(req.query) ? req.query[0] : req.query;
+
+  const { data } = Array.isArray(req.query) ? req.query[0] : req.query;
   //Da die Parameter entweder nur ein String oder ein String-Array sind, muss hier geprüft werden, worum es sich handelt
   //(TypeScript mag keine uneindeutigen Types)
+
+  const klasse = data[0];
+  const datum = data[1] == null ? new Date() : new Date(data[1]);
 
   //Prüfen, ob die Klasse existiert
   if (!klassen.includes(klasse.toUpperCase())) {
     //Fehlermeldung, falls nicht
     res.status(400).json({ error: "Klasse nicht vorhanden" });
   }
+  console.log(data);
+  console.log(datum.toString());
 
   //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
   const table = await untis.getTimetableFor(
-    new Date("2022-06-13"),
+    datum,
     classes[klassen.indexOf(klasse.toUpperCase())].id, //ID der Klasse herausfinden
     WebUntisLib.TYPES.CLASS,
     2
   );
 
+  if(table != "") {
+  console.log("<< Table");
+  } else {
+    console.log("TABLE == NULL OMG NEIN");
+  }
   console.log(table);
-
   let timetableString = ""; //String, der später mit den Informationen gefüllt wird
 
   let id = 0; //ID des Elements, das gerade bearbeitet wird
@@ -97,11 +113,11 @@ export default async function handler(
   //Durch alle Stunden iterieren
   for (const element of table) {
     const sId = id; //eigentlich egal
-    const sKlasse = element.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
+    const sKlasse = element?.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
     const sLehrer = "XX"; //Lehrerkürzel
-    const sFach = element.su[0]?.name; //Fach, z.B. E GK2
-    const sRaum = element.ro[0] != null ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
-    const sStunde: string = tmg.get(element.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+    const sFach = element?.su[0]?.name; //Fach, z.B. E GK2
+    const sRaum = element?.ro[0] != null ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
+    const sStunde: string = tmg.get(element?.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 
     const date = element["date"]; //Datum der Stunde
     const regex = /^(\d{4})(\d{2})(\d{2})$/; //Regex, um das Datum in Jahr, Monat und Tag zu trennen, Muster: 4 Ziffern, 2 Ziffern, 2 Ziffern
@@ -112,7 +128,6 @@ export default async function handler(
       matches == null
         ? 1
         : new Date(matches[1] + "-" + matches[2] + "-" + matches[3]).getDay(); //z.B. new Date("2020-01-01").getDay()
-
 
     //Zeile zusammenfügen und zu String hinzufügen
     const sElement =
@@ -143,7 +158,17 @@ export default async function handler(
     id++;
   }
 
+  //put the response into the cache until the next day at 02:00
+  const tomorrow = new Date(datum);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(2);
+  tomorrow.setMinutes(0);
+  tomorrow.setSeconds(0);
+  cache.put(req.url, timetableString, tomorrow.getTime() - new Date().getTime());
+  console.log("<< Cache | " + tomorrow.toString());
+
   //String als JSON-Response senden
   res.status(200).json(timetableString);
   untis.logout();
+  }
 }
