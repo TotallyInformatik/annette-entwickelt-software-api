@@ -13,6 +13,9 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
 
 
 **Kurze Ankündigung im voraus**
+
+
+
 Der Stundenplan zum Schuljahreswechsel scheint im Moment nicht völlig zu funktionieren. 
 Bitte habt geduld falls welche Probleme auftauchen.
 *Wir arbeiten dran.*
