@@ -1,8 +1,8 @@
-# Die Annette-Entwickelt-Software AG - Annette-App 4.0
+# Annette-App 4.0
   
   
    
-  
+## Annette-Entwickelt-Software AG
 Guten Tag liebe Schülerinnen und Schüler!
   
 Es ist uns, den Entwicklern bei der **Annette-Entwickelt-Software-AG** eine Freude, euch Annette-App 4.0 zu präsentieren.
@@ -12,7 +12,7 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
   
  
 
-## Fehler beim Stundenplan
+## Fehler im Stundenplan
 
 Der Stundenplan zum Schuljahreswechsel scheint im Moment nicht völlig zu funktionieren. 
 Bitte habt geduld falls welche Probleme auftauchen.
