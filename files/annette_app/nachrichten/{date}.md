@@ -2,7 +2,6 @@
   
   
    
-______
   
 Guten Tag liebe Schülerinnen und Schüler!
   
@@ -11,25 +10,13 @@ Seit Anfang des Jahres 2022 arbeiten wir zusammen fleißig an diversen Software-
   
 Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<annettesoftware@gmail.com>**
   
-  
-**Kurze Ankündigung im voraus**
+ 
+
+## Fehler beim Stundenplan
+
 Der Stundenplan zum Schuljahreswechsel scheint im Moment nicht völlig zu funktionieren. 
 Bitte habt geduld falls welche Probleme auftauchen.
 *Wir arbeiten dran.*
-  
-  
-______  
-  
-
-## Was enthält die neue Version?
-
-- überarbeitetes Design
-- Klausurplan-Tab
-- Verbesserter Hausaufgaben-Planer
-- ein Haufen an Bugfixes
-  
-  
-______
   
   
 Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
