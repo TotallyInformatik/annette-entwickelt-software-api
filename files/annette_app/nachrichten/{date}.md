@@ -18,7 +18,7 @@ Der Stundenplan zum Schuljahreswechsel scheint im Moment nicht völlig zu funkti
 Bitte habt geduld falls welche Probleme auftauchen.
 *Wir arbeiten dran.*
 
-#### Bitte nutzt vorerst den Stundenplan unter "Stundenplan" -> "Gesamt" 
+### Bitte nutzt vorerst den Stundenplan unter "Stundenplan" -> "Gesamt" 
 
   
   
