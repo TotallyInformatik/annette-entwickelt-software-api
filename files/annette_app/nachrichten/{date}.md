@@ -16,8 +16,10 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
 Der Stundenplan sollte sowohl für IOS als auch für Android sollte wieder funktionsfähig sein. 
 
 ## Hausaufgabenplaner
-Es scheint ein Fehler im Hausaufgabenplaner zu geben. Bitte habt Geduld. *Wir arbeiten dran.*
-  
+Es scheint ein Fehler im Hausaufgabenplaner für Android zu geben. Bitte habt Geduld. *Wir arbeiten dran.*
+
+
+
 Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
 
 *Die Annette-Entwickelt-Software-AG*
