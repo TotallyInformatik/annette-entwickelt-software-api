@@ -12,14 +12,8 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
   
  
 
-## Fehler im Stundenplan
-
-Der Stundenplan zum Schuljahreswechsel scheint im Moment nicht völlig zu funktionieren. 
-Bitte habt geduld falls welche Probleme auftauchen.
-*Wir arbeiten dran.*
-
-### Bitte nutzt vorerst den Stundenplan unter "Stundenplan" -> "Gesamt" 
-
+## Stundenplan Gefixt
+Der Stundenplan sollte für IOS wieder funktionsfähig sein. 
   
   
 Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
