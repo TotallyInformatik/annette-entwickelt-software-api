@@ -76,6 +76,10 @@ export default async function handler(
       }
     }
 
+    const later = new Date();
+    later.setDate(new Date().getDate() + 4);
+    cache.put("klassen", klassen, later.getTime() - new Date().getTime());
+
     const { data } = Array.isArray(req.query) ? req.query[0] : req.query;
     //Da die Parameter entweder nur ein String oder ein String-Array sind, muss hier geprüft werden, worum es sich handelt
     //(TypeScript mag keine uneindeutigen Types)
@@ -94,7 +98,7 @@ export default async function handler(
     //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
     const table = await untis.getTimetableFor(
       datum,
-      classes[klassen.indexOf(klasse.toUpperCase())].id, //ID der Klasse herausfinden
+      classes[klassen.indexOf(klasse.toUpperCase())]?.id, //ID der Klasse herausfinden
       WebUntisLib.TYPES.CLASS,
       2
     );
