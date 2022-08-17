@@ -11,10 +11,10 @@ Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<anne
 
 　　　
 
-## Stand 10:43 - 13.08.2022
-Sowohl Fehler beim Hausaufgabenplaner und beim Stundenplan sind behoben worden. ***Version 4.0.2 ist jetzt überall vorhanden!*** Nach der Installation sollten die Fehlerbehebungen für euch auch sichtbar sein.
-*Vielen Dank für die Geduld*
+## Stand 17.08.2022 - 18:31
+***Der Stundenplan scheint doch nicht vollständig zu funktionieren. Falls der Stundenplan bei dir nichts anzeigt, so gehe auf "Sonstiges" -> "Klassen Ändern" -> und clickt zwei mal auf Weiter. Der Stundenplan sollte dann gezeigt werden. Wir arbeiten im Moment an einem Bugfix.*** 
 
+*Vielen Dank für die Geduld*
 
 Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
 
