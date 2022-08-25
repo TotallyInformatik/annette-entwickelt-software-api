@@ -9,7 +9,10 @@ Seit Anfang des Jahres 2022 arbeiten wir zusammen fleißig an diversen Software-
   
 Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<annettesoftware@gmail.com>**
 
-　　　
+## Klausurplan
+
+Der Klausurplan ist jetzt für Q1 und Q2 vorhanden!
+**Falls ihr einen Klausurplan aus der EF habt, bitte schickt es an <annettesoftware@gmail.com>**
 
 ## Stand 23.08.2022 - 18:50
 Bald wird Version 4.0.3 der Annette-App! Der Stundenplan ist in Version 4.0.3 vorläufig funktionsfähig. 
