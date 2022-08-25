@@ -107,13 +107,9 @@ export default async function handler(
 console.log(blocks4);
 
   const response: any = {};
-  response.options = [];
   let idx = 0;
   for (let element of blocks4) {
-    response.options[idx] = {
-      name: "Option " + idx.toString(),
-      options: element.names,
-    }
+    response["Option " + (idx + 1).toString()] = element.names;
     idx++;
   }
 
@@ -139,7 +135,7 @@ console.log(blocks4);
 
     schienen['Sport'] = []
     for(let sportkurs = 0; sportkurs < 5; sportkurs++) {
-    schienen['Sport'].push("Sport GK" + sportkurs.toString());
+    schienen['Sport'].push("Sport GK" + (sportkurs + 1).toString());
     }
 
     console.log(schienen);
