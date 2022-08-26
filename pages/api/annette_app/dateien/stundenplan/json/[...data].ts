@@ -96,7 +96,7 @@ export default async function handler(
     console.log(datum.toString());
 
     //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
-    const table = await untis.getTimetableFor(
+    const table = await untis.getTimetableForWeek(
       datum,
       classes[klassen.indexOf(klasse.toUpperCase())]?.id, //ID der Klasse herausfinden
       WebUntisLib.TYPES.CLASS,
@@ -113,60 +113,6 @@ export default async function handler(
 
     let id = 0; //ID des Elements, das gerade bearbeitet wird
 
-    //Durch alle Stunden iterieren
-    for (const element of table) {
-      const sId = id; //eigentlich egal
-      const sKlasse = element?.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
-      const sLehrer = "XX"; //Lehrerkürzel
-      const sFach = element?.su[0]?.name; //Fach, z.B. E GK2
-      const sRaum = element?.ro[0] != null ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
-      const sStunde: string = tmg.get(element?.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
-
-      const date = element["date"]; //Datum der Stunde
-      const regex = /^(\d{4})(\d{2})(\d{2})$/; //Regex, um das Datum in Jahr, Monat und Tag zu trennen, Muster: 4 Ziffern, 2 Ziffern, 2 Ziffern
-      const matches = regex.exec(date); //Ergebnis der Regex-Auswertung
-
-      console.log(sFach);
-      if (sFach != undefined) {
-        console.log("pass!");
-        //Jahr, Monat und Tag aus dem Ergebnis extrahieren, Date erzeugen und den Wochentag herausfinden
-        const sTag =
-          matches == null
-            ? 1
-            : new Date(
-                matches[1] + "-" + matches[2] + "-" + matches[3]
-              ).getDay(); //z.B. new Date("2020-01-01").getDay()
-
-        //Zeile zusammenfügen und zu String hinzufügen
-        const sElement =
-          sId +
-          "," +
-          '"' +
-          sKlasse +
-          '"' +
-          "," +
-          '"' +
-          sLehrer +
-          '"' +
-          "," +
-          '"' +
-          sFach +
-          '"' +
-          "," +
-          '"' +
-          sRaum +
-          '"' +
-          "," +
-          sTag +
-          "," +
-          sStunde +
-          "," +
-          ",";
-        timetableString += sElement;
-        id++;
-      }
-    }
-
     //put the response into the cache until the next day at 02:00
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -181,7 +127,7 @@ export default async function handler(
     console.log("<< Cache | " + tomorrow.toString());
 
     //String als JSON-Response senden
-    res.status(200).json(timetableString);
+    res.status(200).json(table);
     untis.logout();
   }
 }
