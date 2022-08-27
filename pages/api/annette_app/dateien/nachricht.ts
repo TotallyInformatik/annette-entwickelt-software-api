@@ -17,10 +17,13 @@ export default function handler(
   res: NextApiResponse
 ) {
 
-  const filePath = path.resolve(".", `files/annette_app/message.md`);
+  const dirPath = path.resolve(".", `files/annette_app/nachrichten/`);
+  const fileName = fs.readdirSync(dirPath)[0].split(".")[0]; // trims the .md part
+  const filePath = path.resolve(".", `files/annette_app/nachrichten/${fileName}.md`);
   const textBuffer = fs.readFileSync(filePath);
 
   res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+  res.setHeader("Message-Date", fileName); // fileName tells the user the date.
   res.status(200).send(textBuffer);
 
 }
