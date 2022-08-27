@@ -19,15 +19,15 @@ export default function handler(
   res: NextApiResponse
 ) {
 
-  const validClasses = ["ef", "q1", "q2"];
-  const { grade } = req.query;
+  const akzeptierteKlassen = ["ef", "q1", "q2"];
+  const { klasse } = req.query;
 
-  if (!validClasses.includes(grade.toString())) {
+  if (!akzeptierteKlassen.includes(klasse.toString())) {
     res.status(404).json({message: "no such file"});
     return;
   }
 
-  const filePath = path.resolve(".", `files/annette_app/exam_${grade}.pdf`);
+  const filePath = path.resolve(".", `files/annette_app/klausur_${klasse}.pdf`);
   const imageBuffer = fs.readFileSync(filePath);
 
   res.setHeader("Content-Type", "application/pdf"); 
