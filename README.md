@@ -3,10 +3,3 @@ Eine zentrale API für die Annette-Entwickelt-Software AG vom Annette-Gymnasium 
 
 ### Annette-App:
 Für die Annette-App gibt die API Stundenplan Daten und Dateien an.
-
-
-### Branches:
-- file-uploading-branch
-  - bitte nicht löschen!
-  - Dient dazu, Dateien hochzuladen
-
