@@ -46,7 +46,7 @@ export default async function handler(
   } = req;
 
   const cachedResult = cache.get(req.url);
-  if (cachedResult) {
+  if (false /*cachedResult*/) {
     console.log("Serving cached result for", req.url);
     res.status(200).json(cachedResult);
   } else {
@@ -108,10 +108,41 @@ export default async function handler(
     } else {
       console.log("TABLE == NULL OMG NEIN");
     }
-    console.log(table);
-    let timetableString = ""; //String, der später mit den Informationen gefüllt wird
+    let timetableChungus: any[] = [];
 
-    let id = 0; //ID des Elements, das gerade bearbeitet wird
+    const dateConversionRx = /^(\d{4})(\d{2})(\d{2})$/; //Regex, um das Datum in Jahr, Monat und Tag zu trennen, Muster: 4 Ziffern, 2 Ziffern, 2 Ziffern
+
+    for (let entry of table) {
+      //Temporäres Objekt, um die Daten zwischenzuspeichern
+      let tempEntry: any = {};
+
+      const adjustedDate = dateConversionRx.exec(entry["date"]);
+
+      /*
+      --- Nicht-Null-basiertes Indexing!! ---
+      */
+      tempEntry.day = new Date(
+        `${adjustedDate![1]}-${adjustedDate![2]}-${adjustedDate![3]}`
+      ).getDay();
+      tempEntry.lsNumber = tmg.get(entry.startTime.toString()) as String;
+      tempEntry.subject = {
+        shortName: entry.subjects[0]?.element?.displayName,
+        longName: entry.subjects[0]?.element?.longName,
+      };
+
+      tempEntry.room = entry.rooms[0]?.element?.name;
+
+      if(entry.rooms[0]?.state != "REGULAR" || entry.subjects[0]?.state != "REGULAR") {
+        tempEntry.regular = false;
+      } else {
+        tempEntry.regular = true;
+      }
+
+      timetableChungus.push(tempEntry);
+    }
+    res.status(200).json(timetableChungus);
+
+    /*let id = 0; //ID des Elements, das gerade bearbeitet wird
 
     //put the response into the cache until the next day at 02:00
     const tomorrow = new Date();
@@ -119,15 +150,11 @@ export default async function handler(
     tomorrow.setHours(4);
     tomorrow.setMinutes(0);
     tomorrow.setSeconds(0);
-    cache.put(
-      req.url,
-      timetableString,
-      tomorrow.getTime() - new Date().getTime()
-    );
+    cache.put(req.url, table, tomorrow.getTime() - new Date().getTime());
     console.log("<< Cache | " + tomorrow.toString());
 
     //String als JSON-Response senden
-    res.status(200).json(table);
+    res.status(200).json(table);*/
     untis.logout();
   }
 }
