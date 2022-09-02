@@ -46,7 +46,7 @@ export default async function handler(
   } = req;
 
   const cachedResult = cache.get(req.url);
-  if (false /*cachedResult*/) {
+  if (cachedResult) {
     console.log("Serving cached result for", req.url);
     res.status(200).json(cachedResult);
   } else {
@@ -142,8 +142,6 @@ export default async function handler(
     }
     res.status(200).json(timetableChungus);
 
-    /*let id = 0; //ID des Elements, das gerade bearbeitet wird
-
     //put the response into the cache until the next day at 02:00
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -154,7 +152,7 @@ export default async function handler(
     console.log("<< Cache | " + tomorrow.toString());
 
     //String als JSON-Response senden
-    res.status(200).json(table);*/
+    res.status(200).json(table);
     untis.logout();
   }
 }
