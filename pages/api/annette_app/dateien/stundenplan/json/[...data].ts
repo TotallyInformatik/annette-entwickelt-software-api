@@ -76,6 +76,10 @@ export default async function handler(
       }
     }
 
+    const later = new Date();
+    later.setDate(new Date().getDate() + 4);
+    cache.put("klassen", klassen, later.getTime() - new Date().getTime());
+
     const { data } = Array.isArray(req.query) ? req.query[0] : req.query;
     //Da die Parameter entweder nur ein String oder ein String-Array sind, muss hier geprüft werden, worum es sich handelt
     //(TypeScript mag keine uneindeutigen Types)
@@ -92,9 +96,9 @@ export default async function handler(
     console.log(datum.toString());
 
     //Timetable der Klasse abfragen, die ausgewählt wurde (für den aktuellen Tag)
-    const table = await untis.getTimetableFor(
+    const table = await untis.getTimetableForWeek(
       datum,
-      classes[klassen.indexOf(klasse.toUpperCase())].id, //ID der Klasse herausfinden
+      classes[klassen.indexOf(klasse.toUpperCase())]?.id, //ID der Klasse herausfinden
       WebUntisLib.TYPES.CLASS,
       2
     );
@@ -104,64 +108,39 @@ export default async function handler(
     } else {
       console.log("TABLE == NULL OMG NEIN");
     }
-    console.log(table);
-    let timetableString = ""; //String, der später mit den Informationen gefüllt wird
+    let timetableChungus: any[] = [];
 
-    let id = 0; //ID des Elements, das gerade bearbeitet wird
+    const dateConversionRx = /^(\d{4})(\d{2})(\d{2})$/; //Regex, um das Datum in Jahr, Monat und Tag zu trennen, Muster: 4 Ziffern, 2 Ziffern, 2 Ziffern
 
-    //Durch alle Stunden iterieren
-    for (const element of table) {
-      const sId = id; //eigentlich egal
-      const sKlasse = element?.kl[0]?.name; //Klassenname, z.B. 5A, EF, Q1
-      const sLehrer = "XX"; //Lehrerkürzel
-      const sFach = element?.su[0]?.name; //Fach, z.B. E GK2
-      const sRaum = element?.ro[0] != null ? element.ro[0]?.name : ""; //Falls vorhanden: Raum, z.B. B001, sonst leer, aber nicht null
-      const sStunde: string = tmg.get(element?.startTime.toString()) as string; //Stundennummer, z.B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+    for (let entry of table) {
+      //Temporäres Objekt, um die Daten zwischenzuspeichern
+      let tempEntry: any = {};
 
-      const date = element["date"]; //Datum der Stunde
-      const regex = /^(\d{4})(\d{2})(\d{2})$/; //Regex, um das Datum in Jahr, Monat und Tag zu trennen, Muster: 4 Ziffern, 2 Ziffern, 2 Ziffern
-      const matches = regex.exec(date); //Ergebnis der Regex-Auswertung
+      const adjustedDate = dateConversionRx.exec(entry["date"]);
 
-      console.log(sFach);
-      if (sFach != undefined) {
-        console.log("pass!");
-        //Jahr, Monat und Tag aus dem Ergebnis extrahieren, Date erzeugen und den Wochentag herausfinden
-        const sTag =
-          matches == null
-            ? 1
-            : new Date(
-                matches[1] + "-" + matches[2] + "-" + matches[3]
-              ).getDay(); //z.B. new Date("2020-01-01").getDay()
+      /*
+      --- Nicht-Null-basiertes Indexing!! ---
+      */
+      tempEntry.day = new Date(
+        `${adjustedDate![1]}-${adjustedDate![2]}-${adjustedDate![3]}`
+      ).getDay();
+      tempEntry.lsNumber = tmg.get(entry.startTime.toString()) as String;
+      tempEntry.subject = {
+        shortName: entry.subjects[0]?.element?.displayName,
+        longName: entry.subjects[0]?.element?.longName,
+      };
 
-        //Zeile zusammenfügen und zu String hinzufügen
-        const sElement =
-          sId +
-          "," +
-          '"' +
-          sKlasse +
-          '"' +
-          "," +
-          '"' +
-          sLehrer +
-          '"' +
-          "," +
-          '"' +
-          sFach +
-          '"' +
-          "," +
-          '"' +
-          sRaum +
-          '"' +
-          "," +
-          sTag +
-          "," +
-          sStunde +
-          "," +
-          ",";
-        timetableString += sElement;
-        id++;
+      tempEntry.room = entry.rooms[0]?.element?.name;
+
+      if(entry.rooms[0]?.state != "REGULAR" || entry.subjects[0]?.state != "REGULAR") {
+        tempEntry.regular = false;
+      } else {
+        tempEntry.regular = true;
       }
+
+      timetableChungus.push(tempEntry);
     }
+    res.status(200).json(timetableChungus);
 
     //put the response into the cache until the next day at 02:00
     const tomorrow = new Date();
@@ -169,15 +148,11 @@ export default async function handler(
     tomorrow.setHours(4);
     tomorrow.setMinutes(0);
     tomorrow.setSeconds(0);
-    cache.put(
-      req.url,
-      timetableString,
-      tomorrow.getTime() - new Date().getTime()
-    );
+    cache.put(req.url, table, tomorrow.getTime() - new Date().getTime());
     console.log("<< Cache | " + tomorrow.toString());
 
     //String als JSON-Response senden
-    res.status(200).json(timetableString);
+    res.status(200).json(table);
     untis.logout();
   }
 }
