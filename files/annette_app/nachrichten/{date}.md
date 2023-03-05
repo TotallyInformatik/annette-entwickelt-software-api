@@ -2,22 +2,12 @@
   
 　　　
    
-## Annette-Entwickelt-Software AG
-  
-Es ist uns, den Entwicklern bei der **Annette-Entwickelt-Software-AG** eine Freude, euch Annette-App 4.0 zu präsentieren.
-Seit Anfang des Jahres 2022 arbeiten wir zusammen fleißig an diversen Software-Projekten der Schule, inklusive der *Annette-App*.
-  
-Falls ihr Feedback, Wünsche oder Kritik habt, so schreibt eine Email an **<annettesoftware@gmail.com>**
+## 05.03.2023
+Liebe Schülerinnen und Schüler am Annette-Gymnasium,
 
-## Klausurplan
-Der Klausurplan ist jetzt für die Oberstufe vorhanden!
+entschuldigt die Inaktivität der Annette-Softwareentwicklung in den vorherigen Wochen. Im Rahmen der Abitur- und Klausurvorbereitungen sowie der vielen Projekten, die nebenbei gewartet werden, hatten wir leider keine Zeit, uns um die App zu kümmern.
+Jetzt sind wir aber wieder zurück. Der Klausurplan der Oberstufe wird hochgeladen und ist jetzt auch für die Q1 und Q2 verfügbar.
+Wer Zugang zu den Klausurplan der EF hat, bitte an <annettesoftware@gmail.com> schicken!
 
-## Stand 22.10.2022 - 23:32
-Version 4.0.5 ist auch jetzt raus!
-Es gibt wieder Bugfixes und Verbesserungen im Stundenplan.
-
-*Vielen Dank für die Geduld*
-
-Viel Spaß und hoffentlich viel Zufriedenheit mit der neuen Annette-App!
-
-*Die Annette-Entwickelt-Software-AG*
+Viele Grüße,
+Rui Zhang, Annette-Softwareentwicklung
