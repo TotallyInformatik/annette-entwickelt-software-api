@@ -2,12 +2,10 @@
   
 　　　
    
-## 05.03.2023
-Liebe Schülerinnen und Schüler am Annette-Gymnasium,
-
-entschuldigt die Inaktivität der Annette-Softwareentwicklung in den vorherigen Wochen. Im Rahmen der Abitur- und Klausurvorbereitungen sowie der vielen Projekten, die nebenbei gewartet werden, hatten wir leider keine Zeit, uns um die App zu kümmern.
-Jetzt sind wir aber wieder zurück. Der Klausurplan der Oberstufe wird hochgeladen und ist jetzt auch für die Q1 und Q2 verfügbar.
-Wer Zugang zu den Klausurplan der EF hat, bitte an <annettesoftware@gmail.com> schicken!
+## 28.04.2023
+Die Annette-App ist leider nicht mehr auf dem App Store zu finden. Auf dem Google Play Store ist sie jedoch immer noch herunterzuladen.
+Wir entschuldigen uns als Arbeitsgemeinschaft für diese Unannehmlichkeit für die Apple Nutzer und versuchen das Problem schnellstmöglich mit den Lehrkräften zu klären, unser Entwicklungskonto wird nämlich von der Schule bereitgestellt. 
+Wir sind weiterhin unter <annettesoftware@gmail.com> zu erreichen.
 
 Viele Grüße,
 Rui Zhang, Annette-Softwareentwicklung
