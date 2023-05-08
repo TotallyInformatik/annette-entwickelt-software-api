@@ -2,10 +2,8 @@
   
 　　　
    
-## 28.04.2023
-Die Annette-App ist leider nicht mehr auf dem App Store zu finden. Auf dem Google Play Store ist sie jedoch immer noch herunterzuladen.
-Wir bitten als Arbeitsgemeinschaft für diese Unannehmlichkeit für die Apple Nutzer um Geduld und versuchen das Problem schnellstmöglich mit den Lehrkräften zu klären, unser Entwicklungskonto wird nämlich von der Schule bereitgestellt. 
-Wir sind weiterhin unter <annettesoftware@gmail.com> zu erreichen.
+## 08.05.2023
+Hervorragende Nachrichten liebe Schülerinnen und Schüler! Die Annette-App ist wieder auf dem App-Store zu finden. Vielen Dank für eure Geduld und an Herrn Götz, der sich auch in seinem Sabbatjahr um die Reaktivierung des Apple-Accounts gekümmert hat :) 
 
 Viele Grüße,
 Rui Zhang, Annette-Softwareentwicklung
