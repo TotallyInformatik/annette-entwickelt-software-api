@@ -64,8 +64,10 @@ export default async function handler(
     //Untis-Client initialisieren
     await untis.login();
 
+    const sy = await untis.getLatestSchoolyear();
+
     //Alle Klassen, die es auf Untis gibt, abfragen
-    const classes = await untis.getClasses();
+    const classes = await untis.getClasses(undefined, sy.id);
 
     //Alle tatsächlichen Klassen in das Array schreiben
     for (let element of classes) {
